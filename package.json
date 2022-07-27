@@ -1,0 +1,31 @@
+{
+	"name": "fpgen-server",
+	"version": "1.0.0",
+	"description": "A backend server for assisted generation of synthetic fingerprints with the help of pre-trained GAN models",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "nodemon index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/azmke/fpgen-server.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/azmke/fpgen-server/issues"
+	},
+	"homepage": "https://github.com/azmke/fpgen-server#readme",
+	"dependencies": {
+		"compression": "^1.7.4",
+		"express": "^4.18.1",
+		"helmet": "^5.1.1",
+		"morgan": "^1.10.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.19",
+		"prettier": "^2.7.1"
+	}
+}
