@@ -13,16 +13,24 @@ app.use(express.json());
 const morgan = require("morgan");
 app.use(morgan("tiny"));
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-	console.log(`HTTP server running on port ${port}`);
-});
-
 const router = require("./router");
 app.use("/", router);
 
 app.get("/", (req, res) => {
 	res.status(200).send("OK");
+});
+
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+const swaggerOptions = require("./swagger");
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+	console.log(`HTTP server running on port ${port}`);
 });
 
 module.exports = app;
