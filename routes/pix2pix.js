@@ -9,9 +9,9 @@ const router = express.Router();
  *     description: Returns a random fingerprint image generated using pix2pix
  */
 router.get("/pix2pix/generate", (req, res) => {
-    const {minutiaemap, representation, gpu} = req.body;
+	const { minutiaemap, representation, gpu } = req.body;
 
-    res.end();
+	res.end();
 });
 
 module.exports = router;

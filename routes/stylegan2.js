@@ -9,9 +9,9 @@ const router = express.Router();
  *     description: Returns a random fingerprint image generated using StyleGAN2
  */
 router.get("/stylegan2/generate", (req, res) => {
-    const {seed, gpu, truncation} = req.body;
+	const { seed, gpu, truncation } = req.body;
 
-    res.end();
+	res.end();
 });
 
 module.exports = router;

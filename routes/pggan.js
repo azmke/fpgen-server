@@ -9,9 +9,9 @@ const router = express.Router();
  *     description: Returns a random fingerprint image generated using a Progressive Growing GAN
  */
 router.get("/pggan/generate", (req, res) => {
-    const {seed, gpu} = req.body;
+	const { seed, gpu } = req.body;
 
-    res.end();
+	res.end();
 });
 
 module.exports = router;
