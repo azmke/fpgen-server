@@ -5,6 +5,9 @@ const router = express.Router();
 
 const axios = require("axios").default;
 
+const path = require("path");
+const fs = require("fs");
+
 /**
  * @swagger
  * /stylegan/generate:
@@ -12,9 +15,9 @@ const axios = require("axios").default;
  *     summary: Generate fingerprint with StyleGAN
  *     description: Returns a random fingerprint image generated using StyleGAN
  */
-router.get("/stylegan/generate", async (req, res) => {
+router.post("/stylegan/generate", async (req, res) => {
 	try {
-		const { seed, gpu } = req.params;
+		const { seed, gpu } = req.body;
 
 		// request to Andreys API
 		const response = await axios.get(
@@ -49,14 +52,42 @@ router.get("/stylegan/generate", async (req, res) => {
 			});
 		}
 
-		const path = match[1];
 		const filename = match[2];
 
 		// wait for fingerprint image to be generated
 
-		console.log(response);
+		const filepath = path.join(config.STYLEGAN_DIR, filename + ".png");
+		console.log(filepath);
 
-		res.end();
+		let counter = Math.floor(
+			config.FILECHECK_TIMEOUT / config.FILECHECK_INTERVAL
+		);
+
+		const filecheck = setInterval(function () {
+			try {
+				fs.accessSync(filepath);
+				// success!! file exists
+
+				// clear interval
+				clearInterval(filecheck);
+
+				// return file
+				res.sendFile(filepath);
+			} catch (err) {
+				counter--;
+			}
+
+			// could not access file
+			if (counter == 0) {
+				clearInterval(filecheck);
+
+				res.status(500).json({
+					message: "Fingerprint file not found",
+					code: "FILE_NOT_FOUND",
+					ok: false,
+				});
+			}
+		}, config.FILECHECK_INTERVAL);
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({

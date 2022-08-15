@@ -1,4 +1,9 @@
 {
-	"ANDREYS_API": "http://localhost:7777",
-	"SHARED_FOLDER": "/"
+	"ANDREYS_API": "http://host.docker.internal:7777",
+	"PGGAN_DIR": "/shared/pggan",
+	"STYLEGAN_DIR": "/shared/stylegan",
+	"STYLEGAN2_DIR": "/shared/stylegan2",
+	"PIX2PIX_DIR": "/shared/pix2pix",
+	"FILECHECK_INTERVAL": 1000,
+	"FILECHECK_TIMEOUT": 10000
 }
