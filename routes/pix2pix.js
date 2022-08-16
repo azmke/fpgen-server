@@ -11,6 +11,9 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 
+const FormData = require("form-data");
+const { Readable } = require('stream');
+
 /**
  * @swagger
  * /pix2pix/generate:
@@ -23,11 +26,12 @@ router.post(
 	upload.single("minutiaemap"),
 	async (req, res) => {
 		try {
-			const minutiaemap = req.file;
+			const image = req.file;
+			const stream = Readable.from(image.buffer);
 			const { representation, gpu } = req.body;
 
 			const formData = new FormData();
-			formData.append("minutiaemap", minutiaemap);
+			formData.append("minutiaemap", stream);
 			formData.append("representation", representation);
 			formData.append("gpu", gpu);
 
