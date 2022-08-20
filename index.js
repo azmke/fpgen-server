@@ -3,8 +3,7 @@ const cors = require("cors");
 
 const express = require("express");
 const app = express();
-
-router.use(cors);
+app.use(cors());
 
 const helmet = require("helmet");
 app.use(helmet());
@@ -20,6 +19,7 @@ app.use(morgan("tiny"));
 
 const router = require("./router");
 app.use("/", router);
+
 
 app.get("/", (req, res) => {
 	res.status(200).send("OK");
