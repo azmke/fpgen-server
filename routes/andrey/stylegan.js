@@ -10,18 +10,18 @@ const fs = require("fs");
 
 /**
  * @swagger
- * /pggan/generate:
+ * /stylegan/generate:
  *   get:
- *     summary: Generate fingerprint with Progressive Growing GAN
- *     description: Returns a random fingerprint image generated using a Progressive Growing GAN
+ *     summary: Generate fingerprint with StyleGAN
+ *     description: Returns a random fingerprint image generated using StyleGAN
  */
-router.post("/pggan/generate", async (req, res) => {
+router.post("/stylegan/generate", async (req, res) => {
 	try {
 		const { seed, gpu } = req.body;
 
 		// request to Andreys API
 		const response = await axios.get(
-			`${config.ANDREYS_API}/api/pggan/generate`,
+			`${config.andreys_api.url}/api/stylegan/generate`,
 			{
 				params: {
 					seed,
@@ -56,11 +56,14 @@ router.post("/pggan/generate", async (req, res) => {
 
 		// wait for fingerprint image to be generated
 
-		const filepath = path.join(config.PGGAN_DIR, filename + ".png");
+		const filepath = path.join(
+			config.andreys_api.stylegan_dir,
+			filename + ".png"
+		);
 		console.log(filepath);
 
 		let counter = Math.floor(
-			config.FILECHECK_TIMEOUT / config.FILECHECK_INTERVAL
+			config.filecheck.timeout / config.filecheck.interval
 		);
 
 		const filecheck = setInterval(function () {
@@ -87,7 +90,7 @@ router.post("/pggan/generate", async (req, res) => {
 					ok: false,
 				});
 			}
-		}, config.FILECHECK_INTERVAL);
+		}, config.filecheck.interval);
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({

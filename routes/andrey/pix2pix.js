@@ -12,7 +12,7 @@ const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 
 const FormData = require("form-data");
-const { Readable } = require('stream');
+const { Readable } = require("stream");
 
 /**
  * @swagger
@@ -37,7 +37,7 @@ router.post(
 
 			// request to Andreys API
 			const response = await axios.get(
-				`${config.ANDREYS_API}/api/pix2pix/generate`,
+				`${config.andreys_api.url}/api/pix2pix/generate`,
 				formData,
 				{
 					headers: {
@@ -72,11 +72,14 @@ router.post(
 
 			// wait for fingerprint image to be generated
 
-			const filepath = path.join(config.PIX2PIX_DIR, filename + ".png");
+			const filepath = path.join(
+				config.andreys_api.pix2pix_dir,
+				filename + ".png"
+			);
 			console.log(filepath);
 
 			let counter = Math.floor(
-				config.FILECHECK_TIMEOUT / config.FILECHECK_INTERVAL
+				config.filecheck.timeout / config.filecheck.interval
 			);
 
 			const filecheck = setInterval(function () {
@@ -103,7 +106,7 @@ router.post(
 						ok: false,
 					});
 				}
-			}, config.FILECHECK_INTERVAL);
+			}, config.filecheck.interval);
 		} catch (err) {
 			console.log(err);
 			res.status(500).json({

@@ -1,9 +1,37 @@
 {
-	"ANDREYS_API": "http://host.docker.internal:7777",
-	"PGGAN_DIR": "/shared/pggan",
-	"STYLEGAN_DIR": "/shared/stylegan",
-	"STYLEGAN2_DIR": "/shared/stylegan2",
-	"PIX2PIX_DIR": "/shared/pix2pix",
-	"FILECHECK_INTERVAL": 1000,
-	"FILECHECK_TIMEOUT": 10000
+	"andreys_api": {
+		"url": "http://host.docker.internal:5001",
+		"pggan_dir": "/shared/pggan",
+		"stylegan_dir": "/shared/stylegan",
+		"stylegan2_dir": "/shared/stylegan2",
+		"pix2pix_dir": "/shared/pix2pix"
+	},
+	"filecheck": {
+		"interval": 1000,
+		"timeout": 10000
+	},
+	"dummy": {
+		"pggan": {
+			"path": "/shared/pggan",
+			"count": 895
+		},
+		"stylegan": {
+			"path": "/shared/stylegan",
+			"count": 1876
+		},
+		"stylegan2": {
+			"path": "/shared/stylegan2",
+			"count": 2040
+		},
+		"pix2pix": {
+			"path": "/shared/pix2pix",
+			"count": 1
+		},
+		"filename_prefix": "fake_",
+		"filename_suffix": ".png",
+		"active": true
+	},
+	"nfiq2": {
+		"perfect": 80
+	}
 }
