@@ -12,19 +12,19 @@
 	},
 	"dummy": {
 		"pggan": {
-			"path": "/shared/pggan",
+			"path": "/shared2/pggan",
 			"count": 895
 		},
 		"stylegan": {
-			"path": "/shared/stylegan",
+			"path": "/shared2/stylegan",
 			"count": 1876
 		},
 		"stylegan2": {
-			"path": "/shared/stylegan2",
+			"path": "/shared2/stylegan2",
 			"count": 2040
 		},
 		"pix2pix": {
-			"path": "/shared/pix2pix",
+			"path": "/shared2/pix2pix",
 			"count": 1
 		},
 		"filename_prefix": "fake_",
