@@ -1,9 +1,7 @@
 const config = require("config");
-const cors = require("cors");
 
 const express = require("express");
 const app = express();
-app.use(cors());
 
 const helmet = require("helmet");
 app.use(helmet());
