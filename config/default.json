@@ -25,7 +25,7 @@
 		},
 		"pix2pix": {
 			"path": "/shared2/pix2pix",
-			"count": 1
+			"count": 2040
 		},
 		"filename_prefix": "fake_",
 		"filename_suffix": ".png",

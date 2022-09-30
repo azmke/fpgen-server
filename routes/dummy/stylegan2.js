@@ -13,8 +13,6 @@ router.post("/stylegan2/generate", async (req, res) => {
 
 		res.sendFile(
 			path.join(
-				__dirname,
-				"../../",
 				config.dummy.stylegan2.path,
 				`${config.dummy.filename_prefix}${validatedSeed}${config.dummy.filename_suffix}`
 			)
