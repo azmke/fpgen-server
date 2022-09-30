@@ -1,10 +1,10 @@
 {
 	"andreys_api": {
 		"url": "http://host.docker.internal:5001",
-		"pggan_dir": "/shared/pggan",
-		"stylegan_dir": "/shared/stylegan",
-		"stylegan2_dir": "/shared/stylegan2",
-		"pix2pix_dir": "/shared/pix2pix"
+		"pggan_dir": "/usr/src/app/shared/pggan",
+		"stylegan_dir": "/usr/src/app/shared/stylegan",
+		"stylegan2_dir": "/usr/src/app/shared/stylegan2",
+		"pix2pix_dir": "/usr/src/app/shared/pix2pix"
 	},
 	"filecheck": {
 		"interval": 1000,
@@ -12,19 +12,19 @@
 	},
 	"dummy": {
 		"pggan": {
-			"path": "/shared2/pggan",
+			"path": "/usr/src/app/shared2/pggan",
 			"count": 895
 		},
 		"stylegan": {
-			"path": "/shared2/stylegan",
+			"path": "/usr/src/app/shared2/stylegan",
 			"count": 1876
 		},
 		"stylegan2": {
-			"path": "/shared2/stylegan2",
+			"path": "/usr/src/app/shared2/stylegan2",
 			"count": 2040
 		},
 		"pix2pix": {
-			"path": "/shared2/pix2pix",
+			"path": "/usr/src/app/shared2/pix2pix",
 			"count": 2040
 		},
 		"filename_prefix": "fake_",
