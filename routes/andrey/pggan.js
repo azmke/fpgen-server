@@ -11,9 +11,34 @@ const fs = require("fs");
 /**
  * @swagger
  * /pggan/generate:
- *   get:
+ *   post:
  *     summary: Generate fingerprint with Progressive Growing GAN
  *     description: Returns a random fingerprint image generated using a Progressive Growing GAN
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - seed
+ *               - gpu
+ *             properties:
+ *               seed:
+ *                 type: integer
+ *                 example: 21587761855
+ *               gpu:
+ *                 type: integer
+ *                 example: 1
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           image/png:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       '500':
+ *         description: Internal error
  */
 router.post("/pggan/generate", async (req, res) => {
 	try {

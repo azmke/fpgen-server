@@ -11,9 +11,38 @@ const fs = require("fs");
 /**
  * @swagger
  * /stylegan2/generate:
- *   get:
+ *   post:
  *     summary: Generate fingerprint with StyleGAN2
  *     description: Returns a random fingerprint image generated using StyleGAN2
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - seed
+ *               - truncation
+ *               - gpu
+ *             properties:
+ *               seed:
+ *                 type: integer
+ *                 example: 21587761855
+ *               truncation:
+ *                 type: float
+ *                 example: 0.5
+ *               gpu:
+ *                 type: integer
+ *                 example: 1
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           image/png:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       '500':
+ *         description: Internal error
  */
 router.post("/stylegan2/generate", async (req, res) => {
 	try {

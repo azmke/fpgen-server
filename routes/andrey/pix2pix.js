@@ -17,9 +17,37 @@ const { Readable } = require("stream");
 /**
  * @swagger
  * /pix2pix/generate:
- *   get:
+ *   post:
  *     summary: Generate fingerprint with pix2pix
  *     description: Returns a random fingerprint image generated using pix2pix
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - minutiaemap
+ *               - representation
+ *               - gpu
+ *             properties:
+ *               minutiaemap:
+ *                 type: string
+ *                 format: binary
+ *               representation:
+ *                 type: string
+ *               gpu:
+ *                 type: integer
+ *                 example: 1
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           image/png:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       '500':
+ *         description: Internal error
  */
 router.post(
 	"/pix2pix/generate",

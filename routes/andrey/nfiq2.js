@@ -16,14 +16,39 @@ const { Readable } = require("stream");
 
 /**
  * @swagger
- * /pix2pix/generate:
- *   get:
- *     summary: Generate fingerprint with pix2pix
- *     description: Returns a random fingerprint image generated using pix2pix
+ * /nfiq2/single:
+ *   post:
+ *     summary: Rate fingerprint quality
+ *     description: Returns a score between 0 and 1 how realistic an uploaded fingerprint is
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - image
+ *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 score:
+ *                   type: float
+ *                   example: 0.87
+ *                   
+ *       '500':
+ *         description: Internal error
  */
 router.post(
 	"/pix2pix/generate",
-	upload.single("minutiaemap"),
+	upload.single("image"),
 	async (req, res) => {
 		try {
 			const image = req.file;
@@ -39,7 +64,7 @@ router.post(
 			const { representation, gpu } = req.body;
 
 			const formData = new FormData();
-			formData.append("iamge", stream);
+			formData.append("image", stream);
 
 			// request to Andreys API
 			const response = await axios.get(
